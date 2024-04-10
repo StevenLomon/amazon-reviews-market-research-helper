@@ -1,4 +1,4 @@
-import requests, re, time, aiohttp
+import requests, re, time, aiohttp, random
 import pandas as pd
 import streamlit as st
 from rich import print
@@ -171,7 +171,12 @@ if st.button('Generate File'):
             transformed_keyword = keyword.replace(" ", "+").strip()
             amazon_url = f"https://www.amazon.com/s?k={transformed_keyword}&crid=1CCO5C5M9XGSY&sprefix={transformed_keyword}%2Caps%2C278&ref=nb_sb_noss_1"
             
-            headers = ({'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 
+            user_agents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+                           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
+                           'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36',
+                           'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9']
+
+            headers = ({'User-Agent':random.choice(user_agents), 
                 'Accept-Language': 'en-US,en;q=0.5',
                 'Accept-Encoding': 'gzip, deflate, br',
                 'Referer': 'https://www.amazon.com/',
